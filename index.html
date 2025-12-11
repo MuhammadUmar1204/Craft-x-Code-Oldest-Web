@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Craft x Code Tech | Innovate. Learn. Build.</title>
+  <meta name="description" content="Craft x Code Tech — hands-on coding education in Okara. Python, C/C++, Java, Web and more. Build projects, get mentored.">
+  <meta name="author" content="Craft x Code Tech">
+  <meta name="theme-color" content="#000010">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js" defer></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+<script src="animation.js" defer></script>
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:site_name" content="Craft x Code Tech">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Craft x Code Tech | Innovate. Learn. Build.">
+  <meta property="og:description" content="Hands-on coding education in Okara — Python, C/C++, Java, Web and more.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon & Touch icons (simple set) -->
+  <link rel="icon" href="favicon.png" sizes="32x32">
+  <link rel="icon" href="favicon.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <meta name="application-name" content="Craft x Code Tech">
+  <meta name="title" content="Craft x Code Tech | Innovate. Learn. Build.">
+
+  <!-- Google Font (display=swap improves performance) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+body {
+    -webkit-user-select: none;  /* Chrome/Safari */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE/Edge */
+    user-select: none;          /* Standard */
+}
+</style>
+
+
+  <style>
+    /* ========== Root design tokens ========== */
+    :root{
+      --bg-1: #000010;
+      --bg-2: #0a0a1a;
+      --card: rgba(255,255,255,0.03);
+      --muted: #cfcfd6;
+      --text: #e9eef6;
+      --accent-a: #00d4ff;
+      --accent-b: #ff00c8;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+      --max-width: 1200px;
+      --focus: 3px solid rgba(0,212,255,0.15);
+    }
+    [data-theme='light']{
+      --bg-1:#f7fbff; --bg-2:#eef5fb; --card:rgba(10,10,20,0.04); --muted:#2b2b34; --text:#111217; --accent-a:#006b86; --accent-b:#8c0060; --glass:rgba(0,0,0,0.04);
+    }
+
+    /* ========== Base ========== */
+    *{box-sizing:border-box}
+    /* prevent iOS text autosize and ensure consistent layout on mobile */
+    html,body{max-width:100%;-webkit-text-size-adjust:100%;}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:radial-gradient(circle at top right,var(--bg-2),var(--bg-1)); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+    a{color:inherit; text-decoration:none}
+    .container{width:min(var(--max-width),92%);margin:0 auto}
+
+    /* ========== Accessibility helpers ========== */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:10px;top:10px;width:auto;height:auto;padding:8px 12px;background:var(--accent-a);color:#fff;border-radius:6px;z-index:9999}
+
+    /* ========== Header - Professional Navbar ========== */
+    header.navbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:linear-gradient(180deg, rgba(0,10,16,0.95), rgba(10,10,26,0.88));
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,212,255,0.15);
+      box-shadow:0 8px 32px rgba(0,0,0,0.25);
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    header.navbar:hover{
+      border-bottom-color:rgba(0,212,255,0.3);
+      box-shadow:0 12px 48px rgba(0,212,255,0.12);
+    }
+    
+    .navbar-wrapper{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 0;
+      gap:24px;
+    }
+
+    /* Brand/Logo */
+    .navbar-brand{
+      display:flex;
+      align-items:center;
+      flex-shrink:0;
+    }
+    .logo-link{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      transition:all 0.3s ease;
+      padding:8px 12px;
+      border-radius:10px;
+    }
+    .logo-link:hover{
+      transform:scale(1.05);
+      background:rgba(0,212,255,0.08);
+    }
+    .logo-image{
+      height:48px;
+      width:48px;
+      object-fit:cover;
+      border-radius:10px;
+      box-shadow:0 4px 12px rgba(0,212,255,0.2);
+      transition:all 0.3s ease;
+    }
+    .logo-link:hover .logo-image{
+      box-shadow:0 8px 24px rgba(0,212,255,0.35);
+    }
+    .brand-name{
+      font-size:1.1rem;
+      font-weight:800;
+      color:var(--accent-a);
+      letter-spacing:0.5px;
+      display:none;
+    }
+
+    /* Navigation Menu */
+    .navbar-menu{
+      display:flex;
+      align-items:center;
+      flex-grow:1;
+      justify-content:center;
+      position:relative;
+    }
+
+    .navbar-toggler{
+      display:none;
+      flex-direction:column;
+      background:transparent;
+      border:2px solid var(--accent-a);
+      padding:8px 10px;
+      border-radius:8px;
+      cursor:pointer;
+      gap:5px;
+      transition:all 0.3s ease;
+    }
+    .navbar-toggler:hover{
+      background:rgba(0,212,255,0.1);
+      transform:scale(1.1);
+    }
+    .hamburger-line{
+      width:24px;
+      height:2px;
+      background:var(--accent-a);
+      border-radius:2px;
+      transition:all 0.3s ease;
+    }
+    .navbar-toggler.active .hamburger-line:nth-child(1){
+      transform:rotate(45deg) translate(10px, 10px);
+    }
+    .navbar-toggler.active .hamburger-line:nth-child(2){
+      opacity:0;
+    }
+    .navbar-toggler.active .hamburger-line:nth-child(3){
+      transform:rotate(-45deg) translate(8px, -8px);
+    }
+
+    .navbar-nav{
+      display:flex;
+      gap:8px;
+      list-style:none;
+      margin:0;
+      padding:0;
+      align-items:center;
+    }
+    .navbar-nav li{
+      position:relative;
+    }
+    .nav-link{
+      padding:10px 16px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      font-size:0.95rem;
+      border-radius:8px;
+      transition:all 0.2s ease;
+      position:relative;
+      display:inline-block;
+    }
+    .nav-link::after{
+      content:'';
+      position:absolute;
+      bottom:6px;
+      left:16px;
+      width:0;
+      height:2px;
+      background:linear-gradient(90deg, var(--accent-a), var(--accent-b));
+      transition:width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-link:hover::after,
+    .nav-link:focus::after{
+      width:calc(100% - 32px);
+    }
+    .nav-link:hover,
+    .nav-link:focus{
+      color:var(--accent-a);
+      background:rgba(0,212,255,0.08);
+      outline:none;
+    }
+
+    /* Action Buttons */
+    .navbar-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-shrink:0;
+      /* keep actions anchored to the right side of the navbar */
+      margin-left:auto;
+    }
+
+    /* Stylish Navbar Tagline */
+    .navbar-tagline{
+      display:none;
+      gap:6px;
+      align-items:center;
+      font-size:0.95rem;
+      font-weight:700;
+      letter-spacing:1px;
+      padding:8px 16px;
+      border-radius:8px;
+      background:rgba(0,212,255,0.05);
+      border:1px solid rgba(0,212,255,0.15);
+      transition:all 0.3s ease;
+      cursor:default;
+    }
+    .navbar-tagline:hover{
+      background:rgba(0,212,255,0.1);
+      border-color:rgba(0,212,255,0.3);
+      box-shadow:0 4px 16px rgba(0,212,255,0.15);
+    }
+    
+    .tagline-text{
+      color:var(--accent-a);
+      transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation:taglinePulse 3s ease-in-out infinite;
+      display:inline-block;
+    }
+    .tagline-text:nth-child(1){animation-delay:0s}
+    .tagline-text:nth-child(2){
+      color:var(--accent-b);
+      animation-delay:0.2s;
+      font-size:1.1rem;
+      font-weight:800;
+    }
+    .tagline-text:nth-child(3){animation-delay:0.4s}
+    .tagline-text:nth-child(4){animation-delay:0.6s}
+    
+    .navbar-tagline:hover .tagline-text{
+      animation-duration:1.5s;
+    }
+    
+    @keyframes taglinePulse{
+      0%, 100%{
+        opacity:1;
+        transform:translateY(0);
+        text-shadow:0 0 0px rgba(0,212,255,0);
+      }
+      50%{
+        opacity:0.85;
+        transform:translateY(-2px);
+        text-shadow:0 3px 10px rgba(0,212,255,0.35);
+      }
+    }
+
+    .theme-toggle{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      border:2px solid var(--accent-a);
+      background:rgba(0,212,255,0.08);
+      color:var(--accent-a);
+      cursor:pointer;
+      font-size:1.2rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .theme-toggle:hover{
+      transform:rotate(20deg) scale(1.15);
+      background:rgba(0,212,255,0.15);
+      box-shadow:0 0 24px rgba(0,212,255,0.4);
+    }
+    .theme-toggle:active{
+      transform:rotate(20deg) scale(0.95);
+    }
+
+    .navbar-cta{
+      padding:10px 24px !important;
+      border-radius:25px !important;
+      font-weight:700;
+      font-size:0.95rem;
+      white-space:nowrap;
+    }
+
+    /* ========== Buttons ========== */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 18px;
+      border-radius:30px;
+      font-weight:700;
+      cursor:pointer;
+      border:0;
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position:relative;
+      overflow:hidden;
+    }
+    .btn-primary{
+      background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
+      color:#fff;
+      box-shadow:0 8px 30px rgba(0,0,0,0.28);
+    }
+    .btn-primary::before{
+      content:'';
+      position:absolute;
+      top:50%;
+      left:50%;
+      width:0;
+      height:0;
+      border-radius:50%;
+      background:rgba(255,255,255,0.3);
+      transform:translate(-50%, -50%);
+      transition:width 0.6s, height 0.6s;
+    }
+    .btn-primary:hover::before{
+      width:300px;
+      height:300px;
+    }
+    .btn-primary:hover{
+      transform:translateY(-4px);
+      box-shadow:0 12px 45px rgba(0,212,255,0.4);
+    }
+    .btn-primary:active{
+      transform:translateY(1px);
+      box-shadow:0 4px 15px rgba(0,0,0,0.3);
+    }
+    .btn-outline{
+      background:transparent;
+      border:2px solid var(--accent-a);
+      color:var(--accent-a);
+      padding:9px 18px;
+      border-radius:10px;
+    }
+    .btn-outline:hover{
+      background:rgba(0,212,255,0.1);
+      color:var(--accent-a);
+      transform:translateY(-3px);
+      box-shadow:0 8px 20px rgba(0,212,255,0.2);
+    }
+    .btn-outline:active{
+      transform:translateY(0);
+    }
+
+    /* ========== Hero ========== */
+    .hero{padding:86px 0 54px;text-align:center;background:linear-gradient(135deg, rgba(0,212,255,0.06), rgba(255,0,200,0.04));border-radius:16px;margin-bottom:28px}
+    .hero h2{font-size:2.4rem;color:var(--accent-a);margin:0;letter-spacing:0.4px;font-weight:800}
+    .hero p{margin-top:12px;max-width:820px;margin-left:auto;margin-right:auto;color:var(--muted)}
+    .cta-row{margin-top:18px;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+
+    /* ========== Sections ========== */
+    section{padding:52px 0}
+    h2.section-heading{text-align:center;color:var(--accent-b);text-shadow:0 0 8px rgba(0,0,0,0.12);margin-bottom:22px;font-weight:800}
+
+    /* About */
+    #about{
+      background:linear-gradient(135deg, rgba(0,212,255,0.02), rgba(255,0,200,0.01));
+      border-radius:16px;
+      padding:52px 32px !important;
+      border:2px solid rgba(0,212,255,0.1);
+      transition:all 0.4s ease;
+    }
+    #about:hover{
+      border-color:rgba(0,212,255,0.25);
+      box-shadow:0 12px 40px rgba(0,212,255,0.08);
+    }
+    #about p{
+      max-width:900px;
+      margin:16px auto;
+      font-size:1.05rem;
+      line-height:1.8;
+      color:var(--text);
+    }
+    #about p strong{
+      color:var(--accent-a);
+      font-weight:700;
+    }
+    #about p em{
+      color:var(--accent-b);
+      font-style:italic;
+    }
+    blockquote{
+      border-left:4px solid var(--accent-b);
+      border-radius:8px;
+      padding:16px 20px;
+      background:linear-gradient(90deg, rgba(255,0,200,0.05), rgba(255,0,200,0.02));
+      max-width:700px;
+      margin:24px auto;
+      font-weight:600;
+      color:var(--accent-b);
+      box-shadow:0 4px 15px rgba(0,0,0,0.15);
+      transition:all 0.3s ease;
+      position:relative;
+    }
+    blockquote::before{
+      content:'"';
+      position:absolute;
+      left:-20px;
+      top:-10px;
+      font-size:4rem;
+      opacity:0.1;
+      color:var(--accent-b);
+    }
+    blockquote:hover{
+      transform:translateX(8px);
+      box-shadow:0 8px 25px rgba(0,0,0,0.2);
+      background:linear-gradient(90deg, rgba(255,0,200,0.08), rgba(255,0,200,0.04));
+    }
+
+    /* Instructor */
+    .instructor{display:flex;gap:32px;align-items:center;justify-content:center;flex-wrap:wrap}
+    .instructor img{width:220px;height:220px;border-radius:50%;object-fit:cover;box-shadow:0 0 22px rgba(0,0,0,0.2);max-width:100%;height:auto}
+    .profile-text{max-width:620px}
+    .profile-text h3{color:var(--accent-a);margin:0 0 8px 0}
+
+    /* Courses */
+    /* allow cards to shrink on very narrow devices */
+    .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+    .course-card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .22s ease,box-shadow .22s ease}
+    .course-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.25)}
+
+    /* Testimonials */
+    .testimonials{max-width:1000px;margin:0 auto;position:relative}
+    .testimonial-card{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));text-align:left;min-height:120px}
+    .testimonial-controls{display:flex;gap:10px;justify-content:center;margin-top:12px}
+    .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.06);display:inline-block;cursor:pointer}
+    .dot.active{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));box-shadow:0 6px 18px rgba(0,0,0,0.25)}
+
+    /* Floating social */
+    .floating{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:9999}
+    .floating a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--accent-a),var(--accent-b));color:#fff;border-radius:12px;text-decoration:none;box-shadow:0 8px 26px rgba(0,0,0,0.3)}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:9998}
+    .modal{background:var(--bg-1);color:var(--muted);padding:18px;border-radius:12px;width:100%;max-width:640px;box-shadow:0 12px 48px rgba(0,0,0,0.45)}
+    .form-row{display:flex;gap:10px}
+    .form-row .field{flex:1}
+    input,textarea,select{width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--muted);max-width:100%;box-sizing:border-box}
+
+    /* Prevent long words/URLs causing horizontal scroll */
+    img,video,iframe{max-width:100%;height:auto}
+    p,li,div,h1,h2,h3,h4,h5,h6{word-wrap:break-word;overflow-wrap:break-word}
+
+    /* avoid accidental horizontal overflow */
+    html,body{overflow-x:hidden}
+    .modal .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+
+    /* Footer */
+    footer{padding:22px 0;text-align:center;color:rgba(200,200,200,0.6)}
+    
+    /* Contact section spacing */
+    #contact{padding-bottom:28px}
+    #contact p{margin-bottom:12px}
+
+    /* Focus visible for keyboard users */
+    :focus{outline-offset:3px}
+    .show-focus a:focus,.show-focus button:focus,input:focus,textarea:focus{outline:var(--focus)}
+
+    /* Theme toggle button enhancements */
+    #themeToggle{
+      position:relative;
+      width:44px;
+      height:44px;
+      border-radius:50% !important;
+      padding:0 !important;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.3rem;
+      transition:all 0.4s ease;
+      border:2px solid var(--accent-a) !important;
+      background:rgba(0,212,255,0.08) !important;
+    }
+    #themeToggle:hover{
+      transform:rotate(20deg) scale(1.1);
+      background:rgba(0,212,255,0.15) !important;
+      box-shadow:0 0 20px rgba(0,212,255,0.3) !important;
+    }
+    #themeToggle:active{
+      transform:rotate(20deg) scale(0.95);
+    }
+
+    /* ========== Enhanced Mobile-First Responsive Design ========== */
+    
+    /* Tablets and smaller desktops */
+    @media (max-width:1024px){
+      .hero{padding:64px 0 40px}
+      .navbar-toggler{
+        display:flex;
+      }
+      .brand-name{
+        display:none;
+      }
+      .logo-image{
+        height:44px;
+        width:44px;
+      }
+      #themeToggle{
+        width:42px;
+        height:42px;
+        font-size:1.1rem;
+      }
+      .navbar-nav{
+        display:none;
+        position:absolute;
+        top:calc(100% + 12px);
+        left:0;
+        right:0;
+        flex-direction:column;
+        background:linear-gradient(180deg, var(--bg-1), var(--bg-2));
+        border:2px solid rgba(0,212,255,0.2);
+        border-radius:12px;
+        padding:12px 0;
+        z-index:999;
+        box-shadow:0 12px 40px rgba(0,0,0,0.4);
+        backdrop-filter:blur(10px);
+        animation:slideDown 0.3s ease;
+        gap:0;
+      }
+      @keyframes slideDown{
+        from{
+          opacity:0;
+          transform:translateY(-12px);
+        }
+        to{
+          opacity:1;
+          transform:translateY(0);
+        }
+      }
+      .navbar-nav.open{
+        display:flex;
+      }
+      .nav-link{
+        width:100%;
+        padding:14px 20px !important;
+        border-radius:0;
+        text-align:left;
+      }
+      .nav-link::after{
+        display:none;
+      }
+      .nav-link:hover{
+        background:linear-gradient(90deg, rgba(0,212,255,0.15), rgba(0,212,255,0.08));
+        padding-left:24px !important;
+      }
+    }
+
+    /* Large phones & small tablets (768px) */
+    @media (max-width:768px){
+      .navbar-wrapper{
+        gap:12px;
+      }
+      .container{width:95%}
+      .instructor{flex-direction:column;text-align:center}
+      .instructor img{width:180px;height:180px}
+      .profile-text{text-align:left}
+      .course-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+      .hero h2{font-size:2rem}
+      .hero p{font-size:0.95rem}
+    }
+
+    /* Large phones & small tablets (768px) */
+    @media (max-width:768px){
+      header.navbar{flex-wrap:wrap;gap:12px}
+      .header-left,.header-right{flex:1}
+      .header-center{flex-basis:100%;order:3;text-align:center}
+      .header-center h1{font-size:1rem;margin:0}
+      .hero{padding:48px 0 32px;margin-bottom:24px}
+      .hero h2{font-size:1.8rem;line-height:1.2}
+      .hero p{font-size:0.9rem;max-width:100%}
+      .cta-row{gap:8px}
+      .btn{padding:10px 16px;font-size:0.9rem}
+      section{padding:40px 0}
+      h2.section-heading{font-size:1.6rem}
+      .course-card{padding:14px;font-size:0.9rem}
+      .course-card h3{font-size:1rem;margin:8px 0}
+      .course-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+      .enroll-fieldset{margin:12px 0;padding:14px}
+      .enroll-fieldset legend{font-size:0.9rem;padding:6px 10px}
+      .enroll-fieldset .btn-primary.enroll-now{width:100%;padding:11px;font-size:0.95rem}
+      .floating{right:12px;bottom:12px;gap:8px}
+      .floating a{width:42px;height:42px;font-size:0.9rem}
+    }
+
+    /* Standard phones (480px and up) */
+    @media (max-width:520px){
+      html,body{font-size:14px}
+      header.navbar{padding:8px 0}
+      .navbar-brand{
+        flex-shrink:0;
+      }
+      .logo-image{
+        height:40px;
+        width:40px;
+      }
+      .brand-name{
+        display:none !important;
+      }
+      #themeToggle{
+        width:40px;
+        height:40px;
+        font-size:1rem;
+      }
+      .navbar-cta{
+        padding:9px 16px !important;
+        font-size:0.85rem !important;
+      }
+      .nav-link{
+        font-size:0.85rem;
+      }
+      #about{
+        padding:32px 16px !important;
+      }
+      #about p{
+        font-size:0.95rem;
+        margin:12px auto;
+      }
+      blockquote{
+        padding:14px 16px;
+        font-size:0.9rem;
+      }
+      .hero{padding:40px 0 24px}
+      .hero h2{font-size:1.4rem;letter-spacing:0.2px}
+      .hero p{font-size:0.85rem;margin-top:8px;line-height:1.5}
+      .cta-row{gap:6px;flex-direction:column}
+      .cta-row .btn{width:100%;padding:10px 14px;font-size:0.85rem}
+      .btn{padding:9px 14px;font-size:0.85rem}
+      .btn-primary{font-size:0.85rem}
+      section{padding:32px 0}
+      h2.section-heading{font-size:1.4rem;margin-bottom:16px}
+      #about p{font-size:0.9rem;margin:10px auto}
+      blockquote{padding:10px 14px;font-size:0.9rem}
+      .instructor{gap:16px;padding:0 12px}
+      .instructor img{width:140px;height:140px;min-width:140px;min-height:140px}
+      .profile-text{max-width:100%;font-size:0.9rem}
+      .profile-text h3{font-size:1rem}
+      .profile-text ul{padding-left:20px;font-size:0.9rem}
+      .profile-text li{margin:6px 0}
+      .course-card{padding:12px;font-size:0.9rem;border-radius:10px}
+      .course-card h3{font-size:0.95rem;margin:6px 0}
+      .course-card ul{font-size:0.85rem;padding-left:18px;margin:6px 0}
+      .course-card li{margin:4px 0}
+      .course-grid{grid-template-columns:1fr;gap:10px;margin-top:14px}
+      .upcoming-title{font-size:1.2rem;margin:20px 0 12px!important}
+      
+      /* FAQ responsive */
+      .faq-question{font-size:0.9rem;padding:12px;text-align:left}
+      .faq-answer{font-size:0.85rem;padding:12px}
+      
+      /* Testimonials responsive */
+      .testimonial-card{padding:14px;font-size:0.9rem;min-height:100px}
+      .testimonial-card p{font-size:0.9rem;margin:6px 0}
+      .dot{width:8px;height:8px}
+      
+      /* Environment section */
+      #environment ul{font-size:0.9rem;padding-left:20px}
+      #environment li{margin:8px 0}
+      
+      /* Contact section */
+      #contact p{font-size:0.9rem}
+      #contact a{word-break:break-word}
+      
+      .enroll-fieldset{max-width:100%;margin:16px 0;padding:12px;border-radius:10px}
+      .enroll-fieldset legend{font-size:0.85rem;padding:5px 8px}
+      .enroll-fieldset p{font-size:0.9rem;margin:10px 0;line-height:1.5}
+      .enroll-fieldset .btn-primary.enroll-now{width:100%;padding:10px 12px;font-size:0.85rem;border-radius:8px}
+      
+      /* Modal responsive */
+      .modal{max-width:90%;padding:14px}
+      .modal h3{font-size:1.1rem}
+      .form-row{flex-direction:column;gap:8px}
+      .form-row .field{flex:1}
+      input,textarea,select{padding:9px 10px;font-size:0.9rem;border-radius:6px}
+      .modal .actions{flex-direction:column-reverse;gap:8px}
+      .modal .actions .btn{width:100%;padding:10px 12px;font-size:0.9rem}
+      
+      /* Floating icons */
+      .floating{right:10px;bottom:10px;gap:6px}
+      .floating a{width:40px;height:40px;border-radius:10px;font-size:1rem}
+      
+      .nav-links{
+        top:calc(100% + 5px);
+      }
+      
+      footer{font-size:0.85rem;padding:16px 0}
+    }
+
+    /* Very small phones (under 360px) */
+    @media (max-width:360px){
+      html,body{font-size:13px}
+      header.navbar{padding:10px 0}
+      .logo{gap:8px}
+      .logo img{height:40px;width:40px;display:none}
+      .header-center h1{font-size:0.9rem}
+      .hero h2{font-size:1.2rem}
+      .hero p{font-size:0.8rem}
+      .btn{padding:8px 12px;font-size:0.8rem;border-radius:20px}
+      section{padding:24px 0}
+      h2.section-heading{font-size:1.2rem}
+      .course-card{padding:10px;font-size:0.8rem}
+      .instructor img{width:120px;height:120px}
+      .enroll-fieldset{margin:12px 0;padding:10px}
+      .enroll-fieldset .btn-primary.enroll-now{font-size:0.8rem}
+      .modal{max-width:95%}
+      .floating a{width:38px;height:38px;font-size:0.9rem}
+    }
+
+    /* Show tagline on large tablets and above (1024px+) so branding appears earlier) */
+    @media (min-width:1024px){
+      .navbar-tagline{ display:flex; }
+    }
+
+    /* Large screens (desktop 1200px+) */
+    @media (min-width:1200px){
+      .brand-name{
+        display:inline;
+      }
+      .hero h2{font-size:2.6rem}
+      .hero p{font-size:1rem}
+      .course-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,0.3)}
+      .instructor{gap:48px}
+      .instructor img{width:240px;height:240px}
+    }
+
+    /* Extra large screens (1400px+) */
+    @media (min-width:1400px){
+      .container{width:min(1200px,90%)}
+      section{padding:64px 0}
+    }
+
+    /* ========== Enroll fieldset styles ========== */
+    .enroll-fieldset{max-width:760px;margin:42px auto 18px;padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:var(--card);text-align:center}
+    .enroll-fieldset legend{padding:8px 14px;border-radius:20px;background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#00aeff;font-weight:700}
+    .enroll-fieldset p{margin:14px 0;color:var(--muted)}
+      .enroll-fieldset .enroll-now{display:inline-block;margin-top:8px}
+      /* professional button style for enroll fieldset */
+      .enroll-fieldset .btn-primary.enroll-now{padding:12px 24px;border-radius:12px;font-size:1rem;box-shadow:0 10px 30px rgba(0,0,0,0.25);transition:transform .12s ease,box-shadow .12s ease}
+      .enroll-fieldset .btn-primary.enroll-now:active{transform:translateY(1px)}
+      .enroll-fieldset .btn-primary.enroll-now:hover{box-shadow:0 14px 40px rgba(0,0,0,0.32)}
+      @media (max-width:768px){
+        .enroll-fieldset{margin:32px 0 18px;padding:14px}
+        .enroll-fieldset legend{font-size:0.9rem;padding:6px 10px}
+        .enroll-fieldset .btn-primary.enroll-now{display:block;width:100%;padding:11px;font-size:0.95rem}
+      }
+      @media (max-width:520px){
+        .enroll-fieldset{margin:24px 0 18px; padding:12px}
+        .enroll-fieldset legend{font-size:0.85rem;padding:5px 8px}
+        .enroll-fieldset .btn-primary.enroll-now{display:block;width:100%;padding:10px 12px;border-radius:8px;font-size:0.85rem}
+      }
+
+      /* Neon color animation (optional for legend when class applied) */
+      @keyframes neonColors {
+        0% { color: #ff00ff; text-shadow: 0 0 6px #ff00ff; }
+        20% { color: #00ffff; text-shadow: 0 0 6px #00ffff; }
+        40% { color: #ffff00; text-shadow: 0 0 6px #ffff00; }
+        60% { color: #ff0000; text-shadow: 0 0 6px #ff0000; }
+        80% { color: #00ff00; text-shadow: 0 0 6px #00ff00; }
+        100% { color: #ff00ff; text-shadow: 0 0 6px #ff00ff; }
+      }
+      .neon-legend{font-weight:700;font-size:1rem;animation:neonColors 3s infinite}
+
+      /* Light mode theme improvements */
+      [data-theme='light'] header.navbar {
+        background:linear-gradient(180deg, rgba(247,251,255,0.98), rgba(238,245,251,0.95));
+        border-bottom-color:rgba(0,107,134,0.2);
+      }
+
+      [data-theme='light'] .navbar-tagline{
+        background:rgba(0,107,134,0.06);
+        border-color:rgba(0,107,134,0.15);
+      }
+
+      [data-theme='light'] .navbar-tagline:hover{
+        background:rgba(0,107,134,0.12);
+        border-color:rgba(0,107,134,0.3);
+        box-shadow:0 4px 16px rgba(0,107,134,0.12);
+      }
+
+      [data-theme='light'] .navbar-nav {
+        background:linear-gradient(180deg, #f7fbff, #eef5fb);
+        border-color:rgba(0,107,134,0.15);
+      }
+
+      [data-theme='light'] #about {
+        background:linear-gradient(135deg, rgba(0,107,134,0.03), rgba(140,0,96,0.02));
+        border-color:rgba(0,107,134,0.15);
+      }
+
+      [data-theme='light'] blockquote {
+        background:linear-gradient(90deg, rgba(0,107,134,0.08), rgba(0,107,134,0.04));
+        border-left-color:var(--accent-b);
+      }
+
+    </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+<header class="container navbar" role="banner">
+  <div class="navbar-wrapper">
+    <!-- Logo Section -->
+    <div class="navbar-brand">
+      <a href="#" class="logo-link" aria-label="Craft x Code Tech - Home">
+        <img src="Logo.png" alt="Craft x Code Tech" loading="lazy" width="56" height="56" class="logo-image">
+        <span class="brand-name">Craft x Code Tech</span>
+      </a>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar-menu" aria-label="Primary navigation">
+      <button class="navbar-toggler" id="navToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <ul class="navbar-nav" id="primaryNav" role="menubar">
+        <li><a href="#about" class="nav-link" role="menuitem">About</a></li>
+        <li><a href="#instructor" class="nav-link" role="menuitem">Instructor</a></li>
+        <li><a href="#courses" class="nav-link" role="menuitem">Courses</a></li>
+        <li><a href="#environment" class="nav-link" role="menuitem">Environment</a></li>
+        <li><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Action Buttons -->
+    <div class="navbar-actions">
+      <div class="navbar-tagline">
+        <span class="tagline-text">Craft</span>
+        <span class="tagline-text">×</span>
+        <span class="tagline-text">Code</span>
+        <span class="tagline-text">Tech</span>
+      </div>
+      <button id="themeToggle" class="theme-toggle" title="Toggle dark/light theme" aria-pressed="false" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button id="enrollBtn" class="btn btn-primary navbar-cta">Enroll Now</button>
+    </div>
+  </div>
+</header>
+
+
+
+  <main id="main" class="container" role="main">
+    <section class="hero" aria-label="Hero">
+      <h2>Innovate. Learn. Build.</h2>
+      <p class="lead">The modern coding institute where knowledge meets creativity. Join hands-on classes, live projector sessions, and build real-world projects with mentorship.</p>
+      <div class="cta-row">
+        <a href="#courses" class="btn btn-primary">Explore Courses</a>
+        <a href="#contact" class="btn btn-outline">Contact Us</a>
+      </div>
+
+    <section id="about">
+      <h2 class="section-heading">About Us</h2>
+      <p><strong>Craft x Code Tech</strong> is a modern-age learning institute pioneering hands-on coding education in Pakistan. We combine creativity and technology to craft future innovators.</p>
+      <p>With a <strong>friendly learning-based environment</strong>, <strong>live projector sessions</strong>, and <strong>real-world project building</strong>, our students don’t just learn—they <em>create</em>.</p>
+      <blockquote><strong>Admission Eligibility:</strong> Open for all — no age or educational restriction.</blockquote>
+    </section>
+
+    <section id="instructor">
+      <h2 class="section-heading">Meet Our Instructor</h2>
+      <div class="instructor">
+        <img src="Instructor.png" alt="Muhammad Umar Jamal — Lead Instructor" loading="lazy" width="220" height="220">
+        <div class="profile-text">
+          <h3>Muhammad Umar Jamal — Lead Instructor & Developer</h3>
+          <p>A passionate coder and mentor currently pursuing his BS Computer Science at UCP (Okara Branch).</p>
+          <ul>
+            <li>Diploma in Python Programming (UK Certified)</li>
+            <li>Developer of: Emotion-Based Music Player (AI Project)</li>
+            <li>Leads university workshops and coding teams</li>
+            <li>Advocates: “Code it, test it, see it work.”</li>
+          </ul>
+          <blockquote>“Don’t just learn syntax — learn to think in algorithms.”</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses">
+      <h2 class="section-heading">Courses Offered - Starting January 1,2026</h2>
+      <div class="course-card" aria-labelledby="course-python">
+        <h3 id="course-python">🐍 Python — Basic to Advanced Level</h3>
+        <ul>
+          <li>⏱ Duration: 1 hour daily (7:00 AM – 8:00 AM)</li>
+          <li>💰 Fees: Rs. 5000/- only</li>
+          <li>🏫 Format: Physical classes at Okara center with projector sessions</li>
+        </ul>
+      </div>
+
+      <h3 class="upcoming-title" style="text-align:center;color:var(--accent-b);margin:28px 0 8px;"><br>Upcoming Courses — Starting February 1, 2026</h3>
+      <div class="course-grid" aria-live="polite">
+        <div class="course-card"><strong>C/C++</strong><p>Intro to systems-level thinking & problem solving.</p></div>
+        <div class="course-card"><strong>Java</strong><p>Object-oriented fundamentals and projects.</p></div>
+        <div class="course-card"><strong>HTML/CSS/JavaScript</strong><p>Build interactive web projects and portfolio.</p></div>
+      </div>
+</section>
+    <section id="faq">
+  <h2 class="section-heading">Frequently Asked Questions (FAQ)</h2>
+
+  <div class="faq-container">
+    <!-- Question 1 -->
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        📜 What is the merit requirement for certificates and prize money?
+      </button>
+      <div class="faq-answer">
+        <p>
+          Students who score 85% or above will receive a <strong>certificate of completion</strong>, and students who score 95% or above will receive both a <strong>certificate</strong> and <strong>prize money</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        🎁 Is there a referral offer for the courses?
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes! You get a <strong>500 Rs discount</strong> for every friend you refer. If you refer 10 friends, you can attend the course <strong>completely free of cost</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        📅 When does the first session start and when does registration end?
+      </button>
+      <div class="faq-answer">
+        <p>
+          The first session will start on <strong>1st January</strong>. Registration will close on <strong>31st December</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section id="testimonials">
+      <h2 class="section-heading">Student Testimonials</h2>
+      <div class="testimonials" id="testimonialsArea">
+        <div id="testimonialWrap" aria-live="polite"></div>
+        <div class="testimonial-controls" role="tablist" aria-label="Testimonial controls" id="testimonialDots"></div>
+      </div>
+    </section>
+
+    <section id="environment">
+      <h2 class="section-heading">Our Environment</h2>
+      <ul>
+        <li>🌟 Friendly & Interactive Atmosphere</li>
+        <li>💡 Live Projector Classes</li>
+        <li>🖥 Hands-on Coding Projects</li>
+        <li>🚀 Encouragement of self-learning and experimentation</li>
+        <li>🏆 100/100 Learning Satisfaction</li>
+         <li>✔ Course Toppers Get Certification</li> 
+      </ul>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <h2 class="section-heading">Get in Touch</h2>
+      <p><strong>Institute:</strong> Craft x Code Tech, Haji Azeem Super Market, Str #8, 54/2L, Okara</p>
+      <p><strong>Phone:</strong> <a href="tel:+923219211464">0321-9211464</a> | <strong>Email:</strong> <a href="mailto:craftxcode1204@gmail.com">craftxcode1204@gmail.com</a></p>
+
+      <!-- Embedded map placeholder (uncomment and replace with real embed) -->
+      <!-- <div class="map" aria-hidden="true">Map embed</div> -->
+
+      <!-- Responsive Enroll fieldset -->
+      <fieldset class="enroll-fieldset" aria-labelledby="fieldsetEnrollLegend">
+        <legend id="fieldsetEnrollLegend" class="neon-legend">Enroll</legend>
+        <p style="line-height: 2;">The developer contacts you personally if you want to join our Tech Institute for Learning</p>
+        <div>
+          <button type="button" id="fieldsetEnrollNow" class="btn btn-primary enroll-now" aria-label="Open enroll form">Enroll Now</button>
+        </div>
+      </fieldset>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© Craft x Code Tech | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Floating social/contact icons (use SVGs for crispness) -->
+  <div class="floating" aria-hidden="false">
+    <a href="#contact" title="Contact" aria-label="Contact">✉️</a>
+    <a href="https://www.facebook.com/share/17VpVyVp2K/" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook">
+      <!-- fixed FB glyph -->
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.12 8.44 9.91v-7H8.08v-2.89h2.36V9.41c0-2.33 1.38-3.62 3.5-3.62 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56V12h2.74l-.44 2.91h-2.3v7.0C18.34 21.12 22 17 22 12z" fill="#fff"/></svg>
+    </a>
+    <a href="https://www.instagram.com/craftxcode1204?igsh=MXA5a3V4a3pnaG55aQ==" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.5A4.5 4.5 0 1 0 16.5 13 4.5 4.5 0 0 0 12 8.5zm5.4-3.9a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z" fill="#fff"/></svg>
+    </a>
+  </div>
+
+  <!-- Enroll Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+      <h3 id="modalTitle">Enroll — Quick Form</h3>
+      <form id="enrollForm" action="enroll.php" method="post" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Full name" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="Phone number" required pattern="^[0-9+\-\s]{7,20}$">
+          </div>
+        </div>
+        <div style="margin-top:10px;">
+          <label for="email">Email (optional)</label>
+          <input id="email" name="email" type="email" placeholder="Email (optional)">
+        </div>
+        <div style="margin-top:10px;">
+          <label for="note">Short note / course of interest</label>
+          <textarea id="note" name="note" rows="3" placeholder="Short note / course of interest"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-outline" id="modalClose">Cancel</button>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- GSAP for micro-animations (deferred) -->
+  <!-- duplicate GSAP include removed (kept head includes) -->
+
+  <script>
+    // ====== Theme toggle with persistence & prefers-color-scheme ======
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const stored = localStorage.getItem('cxct-theme');
+    const initial = stored || (prefersDark ? 'dark' : 'light');
+    function applyTheme(t){
+      if(t === 'light') root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme');
+      if(themeToggle){
+        themeToggle.textContent = t === 'light' ? '🌙' : '☀️';
+        themeToggle.setAttribute('aria-pressed', t === 'light');
+      }
+      localStorage.setItem('cxct-theme', t);
+    }
+    applyTheme(initial);
+    if(themeToggle){
+      themeToggle.addEventListener('click', ()=>{ const current = localStorage.getItem('cxct-theme') === 'light' ? 'dark' : 'light'; applyTheme(current); });
+    }
+
+    // ====== Professional navbar functionality ======
+    const navToggle = document.getElementById('navToggle');
+    const primaryNav = document.getElementById('primaryNav');
+    const navLinks = primaryNav ? primaryNav.querySelectorAll('.nav-link') : [];
+    
+    if(navToggle && primaryNav){
+      navToggle.addEventListener('click', ()=>{
+        const open = primaryNav.classList.toggle('open');
+        navToggle.classList.toggle('active');
+        navToggle.setAttribute('aria-expanded', String(open));
+      });
+      
+      // Close menu when a link is clicked
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          primaryNav.classList.remove('open');
+          navToggle.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if(navToggle && primaryNav && !navToggle.contains(e.target) && !primaryNav.contains(e.target)){
+        primaryNav.classList.remove('open');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // ====== Modal logic with focus-trap basics ======
+    const enrollBtn = document.getElementById('enrollBtn');
+    const modal = document.getElementById('modalBackdrop');
+    const modalDialog = modal ? modal.querySelector('.modal') : null;
+    const modalClose = document.getElementById('modalClose');
+    let lastActiveElement = null;
+
+    function openModal(){
+      lastActiveElement = document.activeElement;
+      if(!modal || !modalDialog) return;
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden','false');
+      modalDialog.focus();
+      document.body.style.overflow = 'hidden';
+      trapFocus(modal);
+    }
+    function closeModal(){
+      if(!modal) return;
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      if(lastActiveElement) lastActiveElement.focus();
+    }
+    if(enrollBtn) enrollBtn.addEventListener('click', openModal);
+    // wire the fieldset enroll button to open the same modal
+    const fieldsetEnrollNow = document.getElementById('fieldsetEnrollNow');
+    if(fieldsetEnrollNow){ fieldsetEnrollNow.addEventListener('click', openModal); }
+    if(modalClose) modalClose.addEventListener('click', closeModal);
+    if(modal) modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal && modal.getAttribute('aria-hidden') === 'false') closeModal(); });
+
+    // Basic focus trap (not a full implementation but solid for small dialogs)
+    function trapFocus(container){
+      const focusable = container.querySelectorAll('a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled])');
+      if(!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length -1];
+      container.addEventListener('keydown', (e)=>{
+        if(e.key !== 'Tab') return;
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      });
+    }
+
+    // ====== Enrollment form handling (POST to PHP backend + validation) ======
+    const enrollForm = document.getElementById('enrollForm');
+    if(enrollForm){
+      enrollForm.addEventListener('submit', async function(e){
+        e.preventDefault();
+        if(!enrollForm.checkValidity()){
+          enrollForm.reportValidity();
+          return;
+        }
+        const fd = new FormData(enrollForm);
+        const payload = {
+          name: (fd.get('name') || '').toString(),
+          phone: (fd.get('phone') || '').toString(),
+          email: (fd.get('email') || '').toString(),
+          note: (fd.get('note') || '').toString()
+        };
+
+        try{
+          const resp = await fetch(enrollForm.action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await resp.json();
+          if(resp.ok && data.success){
+            closeModal();
+            enrollForm.reset();
+            alert(data.message || 'Enrollment saved — we will contact you soon.');
+          } else {
+            alert(data.message || 'There was a problem saving your enrollment.');
+          }
+        }catch(err){
+          console.error('Enroll submit error', err);
+          alert('Network error while submitting. Please try again later.');
+        }
+      });
+    }
+
+    // ====== Testimonials carousel (accessible + performant) ======
+    const testimonials = [
+      {name:'Ali R.', role:'Student', text:'Great hands-on mentoring. Built a real project in week 2.'},
+      {name:'Sahil K.', role:'Student', text:'Instructor explains complex ideas simply. Very helpful.'},
+      {name:'Usman T.', role:'Workshop Attendee', text:'Excellent environment and practical labs.'}
+    ];
+    const wrap = document.getElementById('testimonialWrap');
+    const dots = document.getElementById('testimonialDots');
+    let activeIndex = 0;
+    function renderTestimonials(){
+      if(!wrap || !dots) return;
+      wrap.innerHTML = '';
+      testimonials.forEach((t,i)=>{
+        const card = document.createElement('div');
+        card.className='testimonial-card';
+        card.setAttribute('role','tabpanel');
+        card.setAttribute('aria-hidden', i===activeIndex? 'false' : 'true');
+        card.style.display = i===activeIndex? 'block' : 'none';
+        card.innerHTML = `<p>"${t.text}"</p><p style="margin-top:10px;font-weight:600">— ${t.name} <span style='font-weight:400;color:var(--muted)'>${t.role}</span></p>`;
+        wrap.appendChild(card);
+      });
+      dots.innerHTML = '';
+      testimonials.forEach((_,i)=>{
+        const d = document.createElement('button');
+        d.className = 'dot' + (i===activeIndex? ' active' : '');
+        d.setAttribute('aria-label','Show testimonial '+(i+1));
+        d.addEventListener('click', ()=>{ goToTestimonial(i); });
+        dots.appendChild(d);
+      });
+    }
+    function goToTestimonial(i){ activeIndex = i; renderTestimonials(); if(window.gsap) gsap.from('.testimonial-card',{ y:20, opacity:0, duration:0.45, stagger:0.05 }); }
+    if(wrap && dots){
+      renderTestimonials();
+      var testimonialTimer = setInterval(()=>{ activeIndex = (activeIndex+1) % testimonials.length; renderTestimonials(); if(window.gsap) gsap.from('.testimonial-card',{ y:20, opacity:0, duration:0.5 }); }, 6000);
+
+      // Pause on hover/focus
+      wrap.addEventListener('mouseenter', ()=>clearInterval(testimonialTimer));
+      wrap.addEventListener('mouseleave', ()=>{ testimonialTimer = setInterval(()=>{ activeIndex = (activeIndex+1) % testimonials.length; renderTestimonials(); if(window.gsap) gsap.from('.testimonial-card',{ y:20, opacity:0, duration:0.5 }); }, 6000); });
+    }
+
+    // Entrance animations (guarded by prefers-reduced-motion)
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if(!mq.matches && window.gsap){
+      gsap.from('.logo img',{ x:-20, opacity:0, duration:0.8 });
+      gsap.from('.hero h2',{ y:12, opacity:0, duration:0.9, delay:0.1 });
+      gsap.from('.hero p',{ y:8, opacity:0, duration:0.9, delay:0.18 });
+      gsap.from('.course-card',{ y:18, opacity:0, duration:0.8, stagger:0.12, delay:0.15 });
+    }
+
+    // Small enhancement: reveal focus outlines when using keyboard
+    document.addEventListener('keyup', (e)=>{ if(e.key === 'Tab'){ document.body.classList.add('show-focus'); } });
+
+    console.log('Craft x Code Tech — polished single-file loaded');
+  </script>
+
+  <!-- Structured Data: EducationalOrganization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Craft x Code Tech",
+    "url": "https://craftxcode.example.com",
+    "logo": "Logo.png",
+    "sameAs": ["https://www.facebook.com/share/17VpVyVp2K/","https://www.instagram.com/craftxcode1204?igsh=MXA5a3V4a3pnaG55aQ=="],
+    "contactPoint": [{"@type":"ContactPoint","telephone":"+92-321-9211464","contactType":"customer service"}],
+    "address": {"@type":"PostalAddress","streetAddress":"Haji Azeem Super Market, Str #8, 54/2L","addressLocality":"Okara","addressCountry":"PK"}
+  }
+  </script>
+</body>
+</html>
+
+
+
